@@ -11,13 +11,14 @@ public class Enemy : MonoBehaviour {
 	private int takesLives = 10;
 	[SerializeField]
 	private int givesMoney = 5;
-
+    //
+    private int currentFlag = 1;
 
     public void Hit(int damage) {
 		health -= damage;
 		
 		if (health <= 0) {
-			GameManager.instance.money += givesMoney;
+			
 			Die();
 		} else {
 			UpdateHealth();
@@ -26,9 +27,15 @@ public class Enemy : MonoBehaviour {
 
 	private void Die() {
         // Todo: Show dying animation
-        allCount--;
-        Debug.Log("Now remaining Enemy count:" + allCount);
-        Destroy(gameObject);
+
+        if (currentFlag > 0)
+        {
+            currentFlag--;
+            allCount--;
+            Debug.Log("Now remaining Enemy count:" + allCount);
+            Destroy(gameObject);
+            GameManager.instance.money += givesMoney;
+        }
         
     }
 
