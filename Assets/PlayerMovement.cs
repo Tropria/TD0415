@@ -7,10 +7,10 @@ public class PlayerMovement : MonoBehaviour {
     public float moveSpeed = 6f;
     public float rotateSpeed = 6f;
 
-    // Use this for initialization
-    void Start()
+    Animator anim;
+    private void Awake()
     {
-
+        anim = GetComponent<Animator>();
     }
 
     private void FixedUpdate()
@@ -21,7 +21,16 @@ public class PlayerMovement : MonoBehaviour {
         float qe = Input.GetAxisRaw("Horizontal2");
 
         Move(h, v, qe);
+        Animating(h, v);
 
+    }
+
+    void Animating(float h, float v)
+    {
+        //Did we press the horizontal axis or did we press the vertical axis?
+        bool walking = h != 0f || v != 0f;
+        //Debug.Log(" " + walking);
+        anim.SetBool("IsWalking", walking);
     }
 
     private void Move(float h, float v, float qe)

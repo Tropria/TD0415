@@ -3,8 +3,10 @@ using EventsSystem;
 
 
 public class Enemy : MonoBehaviour {
-
+    //**************** important value *************
     public static int allCount = 3;
+
+
     [SerializeField]
 	private int health = 100;
 	[SerializeField]
